@@ -1,8 +1,7 @@
 const mongoose=require("mongoose");
 
-
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 //  Types of tickets
-//  create-bug fixes-research-build
 const TicketSchema=new mongoose.Schema({
     name:{
         type:String,
@@ -15,16 +14,26 @@ const TicketSchema=new mongoose.Schema({
     },
     available:{
         type:Boolean,
-        default:false
+        default:true
     },
-    statusNum:Number,
-    statusLine:String,
-    deadLine:Date,
+    status:{
+        statusNum:Number,
+        statusLine:String,
+    },
+    deadline:Date,
     assignedBy:String,
     assignedTo:String,
+    isRecent:{
+        type:Boolean,
+        default:false
+    },
+    shared:[String],
     stakeHolders:[String],
-    relatedItems:[String]
+    relatedItems:[String],
+    displayInfo:String,
+    requirements:[String]
 })
 
+TicketSchema.plugin(mongoose_fuzzy_searching,{fields:["displayInfo","requirements","name"]})
 
 module.exports=mongoose.model("Ticket",TicketSchema);

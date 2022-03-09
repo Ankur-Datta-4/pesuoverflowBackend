@@ -1,19 +1,20 @@
 const mongoose=require("mongoose");
 
-
 const DetailSchema=new mongoose.Schema({
     pId:{
         type:String,
         required:true
     },
-    contact:String,
+    contact:{
+        email:String,
+        phone:String
+    },
     photoURL:String,
-    about:{
+    interests:{
         type:[String]
     },
-    history:{
-        type:[String]
-    }
+    displayInfo:String
 })
+
 
 module.exports=mongoose.model('Details',DetailSchema);

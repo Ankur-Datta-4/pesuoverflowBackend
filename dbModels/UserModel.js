@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 
 
-
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
 //3 types of users
 //student-mentor-proffesor
 
@@ -11,12 +11,17 @@ const UserSchema=new mongoose.Schema({
         required:true
     },
     type:{
+        type:String
+    },
+    points:{
+        type:Number,
+        default:0
+    },
+    email:{
         type:String,
-        required:true
+        unique:true
     }
 })
-
-
 const PositionSchema=new mongoose.Schema({
     uid:{
         type:String,
